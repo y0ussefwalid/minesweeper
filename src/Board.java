@@ -125,6 +125,10 @@ public class Board {
         }
         System.out.println("\nLegend: \n'-' = Unrevealed, 'M' = Mine, Numbers = Adjacent Mines");
     }
+    public void stats(){
+        System.out.printf("Mines: %d\n", mines);
+        System.out.printf("Flags: %d\n", flags);
+    }
     public void displayBoard2() {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {

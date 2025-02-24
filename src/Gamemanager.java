@@ -65,20 +65,29 @@ public class Gamemanager {
     public void playGame(Scanner scanner) {
         while (!endgame) {
             board.displayBoard();
+            board.stats();
             int[] move = new int[2];
             player.get_move(move, scanner);
-
-            while (!board.updateBoard(move[0], move[1])) {
-                System.out.println("Invalid input");
-                player.get_move(move, scanner);
+            System.out.print("toggle flag ? (y/n): ");
+            String choice = scanner.nextLine().toLowerCase();
+            if (choice.equals("y")) {
+                board.toggleFlag(move[0], move[1]);
             }
-            if (board.checkWin()) {
-                System.out.println("win");
-                endgame = true;
-            } else if (board.checkLose(move[0], move[1])) {
-                System.out.println("lose");
-                endgame = true;
+            else if (choice.equals("n")) {
+                while (!board.updateBoard(move[0], move[1])) {
+                    System.out.println("Invalid input");
+                    player.get_move(move, scanner);
+                }
+                if (board.checkWin()) {
+                    System.out.println("win");
+                    endgame = true;
+                }
+                else if (board.checkLose(move[0], move[1])) {
+                    System.out.println("lose");
+                    endgame = true;
+                }
             }
+            else System.out.println("invalid input");
         }
     }
 }
