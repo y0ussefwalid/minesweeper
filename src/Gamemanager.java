@@ -10,8 +10,7 @@ public class Gamemanager {
         this.player = player;
     }
 
-    public void startGame() {
-        Scanner scanner = new Scanner(System.in);
+    public void startGame(Scanner scanner) {
         System.out.println("Welcome to Minesweeper!");
         System.out.println("Choose difficulty level:");
         System.out.println("1. Easy (5x5, 5 mines)");
@@ -22,6 +21,7 @@ public class Gamemanager {
             System.out.print("Enter your choice (1-3): ");
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
+                scanner.nextLine();
                 if (choice >= 1 && choice <= 3) break;
             }
             else {
@@ -29,7 +29,7 @@ public class Gamemanager {
             }
             System.out.println("Invalid input. Please enter a number between 1 and 3.");
         }
-        int rows, cols,mines;
+        int rows, cols, mines;
         rows = cols = mines = 0;
         switch (choice) {
             case 1:
@@ -48,23 +48,37 @@ public class Gamemanager {
                 mines = 30;
                 break;
         }
-        board = new Board(rows,cols,mines);
+        board = new Board(rows, cols, mines);
         System.out.println("Starting game with a " + rows + "x" + cols + " board and " + mines + " mines.");
         board.initialize();
-        int x,y;
-        x = y = 0;
+        int[] move = new int[2];
         board.displayBoard();
-        player.get_move(x,y);
-        while (!board.first_move(x,y)) {
+        player.get_move(move, scanner);
+        while (!board.first_move(move[0], move[1])) {
             System.out.println("Invalid input");
-            player.get_move(x,y);
+            player.get_move(move, scanner);
         }
+        board.displayBoard2();
+        playGame(scanner);
     }
 
-//    public void endGame() {
-//
-//    }
-    public void playGame() {
+    public void playGame(Scanner scanner) {
+        while (!endgame) {
+            board.displayBoard();
+            int[] move = new int[2];
+            player.get_move(move, scanner);
 
+            while (!board.updateBoard(move[0], move[1])) {
+                System.out.println("Invalid input");
+                player.get_move(move, scanner);
+            }
+            if (board.checkWin()) {
+                System.out.println("win");
+                endgame = true;
+            } else if (board.checkLose(move[0], move[1])) {
+                System.out.println("lose");
+                endgame = true;
+            }
+        }
     }
 }

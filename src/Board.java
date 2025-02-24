@@ -8,6 +8,7 @@ public class Board {
     char[][] board;
     char[][] ref_board;
     boolean[][] visited;
+    boolean[][] safe_board;
     int mines;
     int flags;
     //----------methods----------//
@@ -19,14 +20,15 @@ public class Board {
         board = new char[rows][cols];
         ref_board = new char[rows][cols];
         visited = new boolean[rows][cols];
+        safe_board = new boolean[rows][cols];
     }
 
-    public Board(char[][] b,char[][] r){
-        this.rows = b.length;
-        this.cols = b[0].length;
-        this.board = b;
-        this.ref_board = r;
-    }
+//    public Board(char[][] b,char[][] r){
+//        this.rows = b.length;
+//        this.cols = b[0].length;
+//        this.board = b;
+//        this.ref_board = r;
+//    }
 
     public void initialize(){
         for(int i = 0; i < rows; i++){
@@ -37,10 +39,19 @@ public class Board {
         }
     }
 
-    public boolean first_move(int x, int y){
+    public boolean first_move(int x, int y) {
         if (x < 0 || x >= rows || y < 0 || y >= cols) return false;
         ref_board[x][y] = '0';
-        visited[x][y] = true;
+        safe_board[x][y] = true;
+        // Mark the safe zone (first move and adjacent cells)
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+                int nx = x + dx, ny = y + dy;
+                if (nx >= 0 && nx < rows && ny >= 0 && ny < cols) {
+                    safe_board[nx][ny] = true; // Mark as visited (safe)
+                }
+            }
+        }
         setMines();
         calculateNumbers();
         updateBoard(x, y);
@@ -53,7 +64,7 @@ public class Board {
         while (placedMines < mines) {
             int r = rand.nextInt(rows);
             int c = rand.nextInt(cols);
-            if (ref_board[r][c] != 'M') { // Ensure no duplicate mines
+            if (ref_board[r][c] != 'M' && !safe_board[r][c]) { // Ensure no duplicate mines
                 ref_board[r][c] = 'M';
                 placedMines++;
             }
@@ -113,6 +124,14 @@ public class Board {
             System.out.println("\n   +" + "---+".repeat(cols));
         }
         System.out.println("\nLegend: \n'-' = Unrevealed, 'M' = Mine, Numbers = Adjacent Mines");
+    }
+    public void displayBoard2() {
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                System.out.print(ref_board[row][col] + " ");
+            }
+            System.out.println();
+        }
     }
 
     public boolean updateBoard(int x, int y) {
