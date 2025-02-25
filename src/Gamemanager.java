@@ -1,10 +1,9 @@
 import java.util.Scanner;
 public class Gamemanager {
-    Board board;
-    Player player;
-    long time = 0;
-    boolean endgame = false;
-    int difficulty = 1;
+    private Board board;
+    private Player player;
+    private boolean endgame = false;
+    private int difficulty = 1;
     //----------methods----------//
     public Gamemanager(Player player) {
         this.player = player;

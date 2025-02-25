@@ -11,15 +11,6 @@ public class Board {
     private boolean[][] safe_board;
     private int mines;
     private int flags;
-    public static final String RESET = "\u001B[0m";
-    public static final String RED = "\u001B[31m";
-    public static final String GREEN = "\u001B[32m";
-    public static final String YELLOW = "\u001B[33m";
-    public static final String BLUE = "\u001B[34m";
-    public static final String CYAN = "\u001B[36m";
-    public static final String WHITE = "\u001B[37m";
-    public static final String GRAY = "\u001B[90m";
-
     //----------methods----------//
     public Board(int rows, int cols, int mines) {
         this.rows = rows;
@@ -106,48 +97,38 @@ public class Board {
         }
     }
     public void displayBoard() {
-        // Print column indices with spacing
         System.out.print("    ");
-        for (int col = 0; col < cols; col++) {
-            System.out.printf("%2d  ", col);
+        for (int j = 0; j < cols; j++) {
+            System.out.printf("%2d  ", j);
         }
         System.out.println("\n   +" + "---+".repeat(cols));
-
-        // Print board rows with indices and grid
-        for (int row = 0; row < rows; row++) {
-            System.out.printf("%2d |", row);
-            for (int col = 0; col < cols; col++) {
-                char cell = board[row][col];
-                String color;
-                // Choose color based on cell type
-                if (cell == '-') {
-                    color = WHITE;
+        for (int i = 0; i < rows; i++) {
+            System.out.printf("%2d |", i);
+            for (int j = 0; j < cols; j++) {
+                char cell = board[i][j];
+                String color = Colors.RESET;
+                switch (cell) {
+                    case '-':
+                        color = Colors.WHITE; break;
+                    case 'M':
+                    case 'f':
+                        color = Colors.RED; break;
+                    case '0':
+                        color = Colors.GRAY; break;
+                    case '1':
+                        color = Colors.BLUE; break;
+                    case '2':
+                        color = Colors.GREEN; break;
+                    case '3':
+                        color = Colors.YELLOW; break;
+                    default:
+                        color = Colors.CYAN; break;
                 }
-                else if (cell == 'M' || cell == 'f') {
-                    color = RED;
-                }
-                else if (cell == '0') {
-                    color = GRAY;
-                }
-                else if (cell == '1') {
-                    color = BLUE;
-                }
-                else if (cell == '2') {
-                    color = GREEN;
-                }
-                else if (cell == '3') {
-                    color = YELLOW;
-                }
-                else {
-                    color = CYAN;
-                }
-
-                System.out.print(color + " " + cell + " " + RESET + "|");
+                System.out.print(color + " " + cell + " " + Colors.RESET + "|");
             }
             System.out.println("\n   +" + "---+".repeat(cols));
         }
     }
-
 
     public void stats(){
         System.out.printf("Mines: %d\n", mines);

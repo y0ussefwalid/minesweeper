@@ -60,12 +60,13 @@ public class minesweeper {
         System.out.println("- Use logic to determine where mines are and mark them.");
         System.out.println("- Enjoy and be careful!\n");
         System.out.println("\nGuide:");
-        System.out.println(Board.WHITE + "'-' = Unrevealed" + Board.RESET);
-        System.out.println(Board.RED + "'M' = Mine" + Board.RESET);
-        System.out.println(Board.GRAY + "'0' = Empty Revealed Cell" + Board.RESET);
-        System.out.println(Board.BLUE + "'1' = 1 Adjacent Mine" + Board.RESET);
-        System.out.println(Board.GREEN + "'2' = 2 Adjacent Mines" + Board.RESET);
-        System.out.println(Board.YELLOW + "'3' = 3 Adjacent Mines" + Board.RESET);
-        System.out.println(Board.CYAN + "'4+' = 4+ Adjacent Mines" + Board.RESET);
+        System.out.println(Colors.WHITE + "'-' = Unrevealed" + Colors.RESET);
+        System.out.println(Colors.RED + "'M' = Mine" + Colors.RESET);
+        System.out.println(Colors.GRAY + "'0' = Empty Revealed Cell" + Colors.RESET);
+        System.out.println(Colors.BLUE + "'1' = 1 Adjacent Mine" + Colors.RESET);
+        System.out.println(Colors.GREEN + "'2' = 2 Adjacent Mines" + Colors.RESET);
+        System.out.println(Colors.YELLOW + "'3' = 3 Adjacent Mines" + Colors.RESET);
+        System.out.println(Colors.CYAN + "'4+' = 4+ Adjacent Mines" + Colors.RESET);
     }
+
 }
