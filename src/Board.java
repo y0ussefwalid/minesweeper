@@ -11,6 +11,14 @@ public class Board {
     boolean[][] safe_board;
     int mines;
     int flags;
+    public static final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String WHITE = "\u001B[37m";
+    public static final String GRAY = "\u001B[90m";
     //----------methods----------//
     public Board(int rows, int cols, int mines) {
         this.rows = rows;
@@ -33,7 +41,7 @@ public class Board {
     public void initialize(){
         for(int i = 0; i < rows; i++){
             for(int j = 0; j < cols; j++){
-                board[i][j] = '?';
+                board[i][j] = '-';
                 visited[i][j] = false;
             }
         }
@@ -110,21 +118,46 @@ public class Board {
             System.out.printf("%2d  ", col);
         }
         System.out.println("\n   +" + "---+".repeat(cols));
+
         // Print board rows with indices and grid
         for (int row = 0; row < rows; row++) {
             System.out.printf("%2d |", row);
             for (int col = 0; col < cols; col++) {
                 char cell = board[row][col];
-                if (cell == 0) {
-                    System.out.print("   |"); // Empty cell
+                String color;
+
+                // Choose color based on cell type
+                if (cell == '-') {
+                    color = WHITE;  // Unrevealed cell
+                } else if (cell == 'M') {
+                    color = RED;    // Mine
+                } else if (cell == '0') {
+                    color = GRAY;   // Empty revealed cell
+                } else if (cell == '1') {
+                    color = BLUE;   // 1 adjacent mine
+                } else if (cell == '2') {
+                    color = GREEN;  // 2 adjacent mines
+                } else if (cell == '3') {
+                    color = YELLOW; // 3 adjacent mines
                 } else {
-                    System.out.print(" " + cell + " |");
+                    color = CYAN;   // 4+ adjacent mines
                 }
+
+                System.out.print(color + " " + cell + " " + RESET + "|");
             }
             System.out.println("\n   +" + "---+".repeat(cols));
         }
-        System.out.println("\nLegend: \n'-' = Unrevealed, 'M' = Mine, Numbers = Adjacent Mines");
+        System.out.println("\nLegend:");
+        System.out.println(WHITE + "'-' = Unrevealed" + RESET);
+        System.out.println(RED + "'M' = Mine" + RESET);
+        System.out.println(GRAY + "'0' = Empty Revealed Cell" + RESET);
+        System.out.println(BLUE + "'1' = 1 Adjacent Mine" + RESET);
+        System.out.println(GREEN + "'2' = 2 Adjacent Mines" + RESET);
+        System.out.println(YELLOW + "'3' = 3 Adjacent Mines" + RESET);
+        System.out.println(CYAN + "'4+' = 4+ Adjacent Mines" + RESET);
     }
+
+
     public void stats(){
         System.out.printf("Mines: %d\n", mines);
         System.out.printf("Flags: %d\n", flags);
@@ -159,18 +192,15 @@ public class Board {
         Qy.add(y);
         visited[x][y] = true;
         board[x][y] = ref_board[x][y];
-
         int index = 0;
         while (index < Qx.size()) {
             int curX = Qx.get(index);
             int curY = Qy.get(index);
             index++;
-
             // Process all 8 directions
             for (int d = 0; d < 8; d++) {
                 int newX = curX + dx[d];
                 int newY = curY + dy[d];
-
                 // Bounds check
                 if (newX >= 0 && newX < rows && newY >= 0 && newY < cols) {
                     // If not visited and not a mine, enqueue it
@@ -217,5 +247,4 @@ public class Board {
         }
         return false;
     }
-
 }
