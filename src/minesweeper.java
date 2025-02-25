@@ -21,7 +21,6 @@ public class minesweeper {
                 case "4":
                     userName = getPlayerName(scanner);
                     player = new Player(userName, 0);
-                    gm = new Gamemanager(player);
                     System.out.println("\nHello, " + userName + "! Welcome to Minesweeper.");
                     System.out.println("Your goal is to clear the board without triggering any mines!");
                     System.out.println("Good luck, and have fun!\n");
@@ -31,6 +30,7 @@ public class minesweeper {
                         System.out.println("Please enter a player name first (Option 1 or 4).\n");
                     }
                     else {
+                        gm = new Gamemanager(player);
                         gm.startGame(scanner);
                     }
                     break;
