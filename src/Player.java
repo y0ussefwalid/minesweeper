@@ -4,7 +4,6 @@ public class Player {
     private String name;
     private int n_moves;
 
-    // Constructor
     public Player(String name, int n_moves) {
         this.name = name;
         this.n_moves = n_moves;
@@ -22,7 +21,7 @@ public class Player {
         return n_moves;
     }
 
-    public void get_move(int[] move, Scanner scanner) { // Pass Scanner as a parameter
+    public void get_move(int[] move, Scanner scanner) {
         while (true) {
             System.out.print("Enter row and column separated by a space (ex: 2 3): ");
             String input = scanner.nextLine();

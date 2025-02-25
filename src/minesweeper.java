@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 public class minesweeper {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -19,7 +18,7 @@ public class minesweeper {
             String choice = scanner.nextLine();
             switch (choice) {
                 case "1":
-                case "4": // Re-enter Player Name
+                case "4":
                     userName = getPlayerName(scanner);
                     player = new Player(userName, 0);
                     gm = new Gamemanager(player);
@@ -60,5 +59,13 @@ public class minesweeper {
         System.out.println("- Numbers on the board indicate how many mines are adjacent.");
         System.out.println("- Use logic to determine where mines are and mark them.");
         System.out.println("- Enjoy and be careful!\n");
+        System.out.println("\nGuide:");
+        System.out.println(Board.WHITE + "'-' = Unrevealed" + Board.RESET);
+        System.out.println(Board.RED + "'M' = Mine" + Board.RESET);
+        System.out.println(Board.GRAY + "'0' = Empty Revealed Cell" + Board.RESET);
+        System.out.println(Board.BLUE + "'1' = 1 Adjacent Mine" + Board.RESET);
+        System.out.println(Board.GREEN + "'2' = 2 Adjacent Mines" + Board.RESET);
+        System.out.println(Board.YELLOW + "'3' = 3 Adjacent Mines" + Board.RESET);
+        System.out.println(Board.CYAN + "'4+' = 4+ Adjacent Mines" + Board.RESET);
     }
 }

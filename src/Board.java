@@ -31,13 +31,6 @@ public class Board {
         safe_board = new boolean[rows][cols];
     }
 
-//    public Board(char[][] b,char[][] r){
-//        this.rows = b.length;
-//        this.cols = b[0].length;
-//        this.board = b;
-//        this.ref_board = r;
-//    }
-
     public void initialize(){
         for(int i = 0; i < rows; i++){
             for(int j = 0; j < cols; j++){
@@ -125,36 +118,33 @@ public class Board {
             for (int col = 0; col < cols; col++) {
                 char cell = board[row][col];
                 String color;
-
                 // Choose color based on cell type
                 if (cell == '-') {
-                    color = WHITE;  // Unrevealed cell
-                } else if (cell == 'M') {
-                    color = RED;    // Mine
-                } else if (cell == '0') {
-                    color = GRAY;   // Empty revealed cell
-                } else if (cell == '1') {
-                    color = BLUE;   // 1 adjacent mine
-                } else if (cell == '2') {
-                    color = GREEN;  // 2 adjacent mines
-                } else if (cell == '3') {
-                    color = YELLOW; // 3 adjacent mines
-                } else {
-                    color = CYAN;   // 4+ adjacent mines
+                    color = WHITE;
+                }
+                else if (cell == 'M' || cell == 'f') {
+                    color = RED;
+                }
+                else if (cell == '0') {
+                    color = GRAY;
+                }
+                else if (cell == '1') {
+                    color = BLUE;
+                }
+                else if (cell == '2') {
+                    color = GREEN;
+                }
+                else if (cell == '3') {
+                    color = YELLOW;
+                }
+                else {
+                    color = CYAN;
                 }
 
                 System.out.print(color + " " + cell + " " + RESET + "|");
             }
             System.out.println("\n   +" + "---+".repeat(cols));
         }
-        System.out.println("\nLegend:");
-        System.out.println(WHITE + "'-' = Unrevealed" + RESET);
-        System.out.println(RED + "'M' = Mine" + RESET);
-        System.out.println(GRAY + "'0' = Empty Revealed Cell" + RESET);
-        System.out.println(BLUE + "'1' = 1 Adjacent Mine" + RESET);
-        System.out.println(GREEN + "'2' = 2 Adjacent Mines" + RESET);
-        System.out.println(YELLOW + "'3' = 3 Adjacent Mines" + RESET);
-        System.out.println(CYAN + "'4+' = 4+ Adjacent Mines" + RESET);
     }
 
 
@@ -197,13 +187,10 @@ public class Board {
             int curX = Qx.get(index);
             int curY = Qy.get(index);
             index++;
-            // Process all 8 directions
             for (int d = 0; d < 8; d++) {
                 int newX = curX + dx[d];
                 int newY = curY + dy[d];
-                // Bounds check
                 if (newX >= 0 && newX < rows && newY >= 0 && newY < cols) {
-                    // If not visited and not a mine, enqueue it
                     if (!visited[newX][newY] && ref_board[newX][newY] != 'M') {
                         board[newX][newY] = ref_board[newX][newY];
                         visited[newX][newY] = true;
@@ -246,5 +233,15 @@ public class Board {
             return true;
         }
         return false;
+    }
+
+    public void reveal(){
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (ref_board[i][j] == 'M') {
+                    board[i][j] = 'M';
+                }
+            }
+        }
     }
 }

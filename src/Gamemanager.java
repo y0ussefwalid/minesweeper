@@ -84,6 +84,8 @@ public class Gamemanager {
                 }
                 else if (board.checkLose(move[0], move[1])) {
                     System.out.println("lose");
+                    board.reveal();
+                    board.displayBoard();
                     endgame = true;
                 }
             }
