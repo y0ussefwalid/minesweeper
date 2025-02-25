@@ -3,14 +3,14 @@ import java.util.Random;
 
 public class Board {
 //    int difficulty = 1;
-    int rows;
-    int cols;
-    char[][] board;
-    char[][] ref_board;
-    boolean[][] visited;
-    boolean[][] safe_board;
-    int mines;
-    int flags;
+    private int rows;
+    private int cols;
+    private char[][] board;
+    private char[][] ref_board;
+    private boolean[][] visited;
+    private boolean[][] safe_board;
+    private int mines;
+    private int flags;
     public static final String RESET = "\u001B[0m";
     public static final String RED = "\u001B[31m";
     public static final String GREEN = "\u001B[32m";
@@ -19,6 +19,7 @@ public class Board {
     public static final String CYAN = "\u001B[36m";
     public static final String WHITE = "\u001B[37m";
     public static final String GRAY = "\u001B[90m";
+
     //----------methods----------//
     public Board(int rows, int cols, int mines) {
         this.rows = rows;
