@@ -61,6 +61,7 @@ public class minesweeper {
         System.out.println("\nGuide:");
         System.out.println(Colors.WHITE + "'-' = Unrevealed" + Colors.RESET);
         System.out.println(Colors.RED + "'M' = Mine" + Colors.RESET);
+        System.out.println(Colors.RED + "'F' = Flag" + Colors.RESET);
         System.out.println(Colors.GRAY + "'0' = Empty Revealed Cell" + Colors.RESET);
         System.out.println(Colors.BLUE + "'1' = 1 Adjacent Mine" + Colors.RESET);
         System.out.println(Colors.GREEN + "'2' = 2 Adjacent Mines" + Colors.RESET);

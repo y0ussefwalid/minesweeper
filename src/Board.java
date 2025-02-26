@@ -36,7 +36,6 @@ public class Board {
         if (x < 0 || x >= rows || y < 0 || y >= cols) return false;
         ref_board[x][y] = '0';
         safe_board[x][y] = true;
-        // Mark the safe zone (first move and adjacent cells)
         for (int dx = -1; dx <= 1; dx++) {
             for (int dy = -1; dy <= 1; dy++) {
                 int nx = x + dx, ny = y + dy;
@@ -57,7 +56,7 @@ public class Board {
         while (placedMines < mines) {
             int r = rand.nextInt(rows);
             int c = rand.nextInt(cols);
-            if (ref_board[r][c] != 'M' && !safe_board[r][c]) { // Ensure no duplicate mines
+            if (ref_board[r][c] != 'M' && !safe_board[r][c]) {
                 ref_board[r][c] = 'M';
                 placedMines++;
             }
@@ -70,23 +69,19 @@ public class Board {
         int[] dy = {-1, 0, 1, -1, 1, -1, 0, 1};
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                // If the cell is a mine, continue
                 if (ref_board[i][j] == 'M') {
                     continue;
                 }
                 int count = 0;
-                // Check all 8 neighboring cells
                 for (int d = 0; d < 8; d++) {
                     int ni = i + dx[d];
                     int nj = j + dy[d];
-                    // Ensure indices are within bounds
                     if (ni >= 0 && ni < rows && nj >= 0 && nj < cols) {
                         if (ref_board[ni][nj] == 'M') {
                             count++;
                         }
                     }
                 }
-                // Set the cell value to the count if there are adjacent mines
                 if (count > 0) {
                     ref_board[i][j] = (char) ('0' + count);
                 }
@@ -111,7 +106,7 @@ public class Board {
                     case '-':
                         color = Colors.WHITE; break;
                     case 'M':
-                    case 'f':
+                    case 'F':
                         color = Colors.RED; break;
                     case '0':
                         color = Colors.GRAY; break;
@@ -145,11 +140,9 @@ public class Board {
 
     public boolean updateBoard(int x, int y) {
         if (x < 0 || x >= rows || y < 0 || y >= cols) return false;
-        // If already visited, return false
         if (visited[x][y]) return false;
         visited[x][y] = true;
         board[x][y] = ref_board[x][y];
-        // If it's an empty cell ('0'), trigger flood fill
         if (ref_board[x][y] == '0') floodFill(x, y);
         return true;
     }
@@ -159,7 +152,6 @@ public class Board {
         ArrayList<Integer> Qy = new ArrayList<>();
         int[] dx = {-1, 1, 0, 0, -1, -1, 1, 1};
         int[] dy = {0, 0, -1, 1, -1, 1, -1, 1};
-        // Enqueue starting position
         Qx.add(x);
         Qy.add(y);
         visited[x][y] = true;
@@ -187,9 +179,9 @@ public class Board {
     }
 
     public void toggleFlag(int x, int y) {
-        if(board[x][y] != 'f') {
+        if(board[x][y] != 'F') {
             flags++;
-            board[x][y] = 'f';
+            board[x][y] = 'F';
             visited[x][y] = true;
         }
         else {
