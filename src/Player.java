@@ -2,11 +2,8 @@ import java.util.Scanner;
 
 public class Player {
     private String name;
-    private int n_moves;
-
-    public Player(String name, int n_moves) {
+    public Player(String name) {
         this.name = name;
-        this.n_moves = n_moves;
     }
 
     public String getName() {
@@ -15,10 +12,6 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getN_moves() {
-        return n_moves;
     }
 
     public void get_move(int[] move, Scanner scanner) {
@@ -42,13 +35,5 @@ public class Player {
                 System.out.println("Invalid input. Please enter two integers.");
             }
         }
-    }
-
-    public void increment() {
-        n_moves++;
-    }
-
-    public void reset() {
-        n_moves = 0;
     }
 }

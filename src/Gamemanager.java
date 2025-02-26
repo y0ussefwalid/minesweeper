@@ -78,13 +78,13 @@ public class Gamemanager {
                     player.get_move(move, scanner);
                 }
                 if (board.checkWin()) {
-                    System.out.println("win");
+                    System.out.println("Congratulations! You've successfully cleared the board");
                     endgame = true;
                 }
                 else if (board.checkLose(move[0], move[1])) {
-                    System.out.println("lose");
                     board.reveal();
                     board.displayBoard();
+                    System.out.println("Boom! You hit a mine. Better luck next time!");
                     endgame = true;
                 }
             }

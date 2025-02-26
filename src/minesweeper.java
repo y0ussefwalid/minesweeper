@@ -17,10 +17,9 @@ public class minesweeper {
             System.out.print("Choose an option: ");
             String choice = scanner.nextLine();
             switch (choice) {
-                case "1":
                 case "4":
                     userName = getPlayerName(scanner);
-                    player = new Player(userName, 0);
+                    player = new Player(userName);
                     System.out.println("\nHello, " + userName + "! Welcome to Minesweeper.");
                     System.out.println("Your goal is to clear the board without triggering any mines!");
                     System.out.println("Good luck, and have fun!\n");
