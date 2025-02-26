@@ -73,9 +73,8 @@ public class Gamemanager {
                 board.toggleFlag(move[0], move[1]);
             }
             else if (choice.equals("n")) {
-                while (!board.updateBoard(move[0], move[1])) {
-                    System.out.println("Invalid input");
-                    player.get_move(move, scanner);
+                if(!board.updateBoard(move[0], move[1])) {
+                    System.out.println("illegal move");
                 }
                 if (board.checkWin()) {
                     System.out.println("Congratulations! You've successfully cleared the board");

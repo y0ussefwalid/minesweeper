@@ -17,7 +17,7 @@ public class minesweeper {
             System.out.print("Choose an option: ");
             String choice = scanner.nextLine();
             switch (choice) {
-                case "4":
+                case "1","4":
                     userName = getPlayerName(scanner);
                     player = new Player(userName);
                     System.out.println("\nHello, " + userName + "! Welcome to Minesweeper.");
