@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Board {
-//    int difficulty = 1;
     private int rows;
     private int cols;
     private char[][] board;
@@ -40,7 +39,7 @@ public class Board {
             for (int dy = -1; dy <= 1; dy++) {
                 int nx = x + dx, ny = y + dy;
                 if (nx >= 0 && nx < rows && ny >= 0 && ny < cols) {
-                    safe_board[nx][ny] = true; // Mark as visited (safe)
+                    safe_board[nx][ny] = true;
                 }
             }
         }
@@ -64,7 +63,6 @@ public class Board {
     }
 
     public void calculateNumbers() {
-        // Directions for adjacent cells
         int[] dx = {-1, -1, -1, 0, 0, 1, 1, 1};
         int[] dy = {-1, 0, 1, -1, 1, -1, 0, 1};
         for (int i = 0; i < rows; i++) {
@@ -86,7 +84,7 @@ public class Board {
                     ref_board[i][j] = (char) ('0' + count);
                 }
                 else {
-                    ref_board[i][j] = '0'; // Empty cell
+                    ref_board[i][j] = '0';
                 }
             }
         }

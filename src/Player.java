@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Player {
     private String name;
+    //----------methods----------//
     public Player(String name) {
         this.name = name;
     }
@@ -26,7 +27,7 @@ public class Player {
             try {
                 move[0] = Integer.parseInt(parts[0]);
                 move[1] = Integer.parseInt(parts[1]);
-                if (move[0] >= 0 && move[1] >= 0) { // Add board size limits if needed
+                if (move[0] >= 0 && move[1] >= 0) {
                     break;
                 } else {
                     System.out.println("Coordinates must be non-negative.");
