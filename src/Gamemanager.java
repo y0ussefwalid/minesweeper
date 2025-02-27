@@ -57,7 +57,6 @@ public class Gamemanager {
             System.out.println("Invalid input");
             player.get_move(move, scanner);
         }
-        board.displayBoard2();
         playGame(scanner);
     }
 

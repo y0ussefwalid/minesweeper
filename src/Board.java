@@ -127,14 +127,6 @@ public class Board {
         System.out.printf("Mines: %d\n", mines);
         System.out.printf("Flags: %d\n", flags);
     }
-    public void displayBoard2() {
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                System.out.print(ref_board[row][col] + " ");
-            }
-            System.out.println();
-        }
-    }
 
     public boolean updateBoard(int x, int y) {
         if (x < 0 || x >= rows || y < 0 || y >= cols) return false;
