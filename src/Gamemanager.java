@@ -57,13 +57,13 @@ public class Gamemanager {
             System.out.println("Invalid input");
             player.get_move(move, scanner);
         }
-        board.displayBoard2();
         playGame(scanner);
     }
 
     public void playGame(Scanner scanner) {
         while (!endgame) {
             board.displayBoard();
+            board.displayBoard2();
             board.stats();
             int[] move = new int[2];
             player.get_move(move, scanner);
