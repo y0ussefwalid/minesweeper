@@ -176,7 +176,7 @@ public class Board {
         }
         else {
             flags--;
-            board[x][y] = '?';
+            board[x][y] = '-';
             visited[x][y] = false;
         }
     }
